@@ -5,14 +5,14 @@
 02_MontitoringServer
 ```
 
-### 1. 01_JenkinsServer
+### 1- 01_JenkinsServer
 
 - 01_main.tf
 - 02_provider.tf
 - 03_install.sh
 - terraform.tfstate
 
-### 1.1 01_main.tf
+### 1.1- 01_main.tf
 ```
 resource "aws_instance" "web" {
   ami                    = "ami-0866a3c8686eaeeba"   
@@ -66,7 +66,7 @@ resource "aws_security_group" "My-Jenkins-Server-SG" {
 
 ```
 
-### 1.2 02_provider.tf
+### 1.2- 02_provider.tf
 
 ```
 terraform {
@@ -88,7 +88,7 @@ provider "aws" {
 ```
 
 
-### 1.3 03_install.sh
+### 1.3- 03_install.sh
 
 ```
 #!/bin/bash
@@ -133,7 +133,7 @@ sudo apt-get install trivy -y
 ```
 
 
-### 1.4 terraform.tfstate
+### 1.4- terraform.tfstate
 
 
 ```
@@ -414,9 +414,9 @@ sudo apt-get install trivy -y
 
 
 ***************************************************************************************************************************************************************************************************************************************************************************************************************************
-### 2. 02_MontitoringServer
+### 2- 02_MontitoringServer
 
-### 2.1 01_main.tf
+### 2.1- 01_main.tf
 
 ```
 resource "aws_instance" "web" {
@@ -514,7 +514,7 @@ provider "aws" {
 
 ```
 
-03_install.sh
+### 2.2- 03_install.sh
 
 ```
 #!/bin/bash
