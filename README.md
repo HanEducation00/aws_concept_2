@@ -1,4 +1,8 @@
-- İki adet serverı terraform ile kuracağız.
+- İki adet server ı terraform ile kuracağız.
+
+- AWS de Manage Access Key oluştur
+- AWS Cli locale kur
+- 
 
 ```
 01_JenkinsServer
