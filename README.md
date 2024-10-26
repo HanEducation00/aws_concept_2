@@ -2,7 +2,8 @@
 
 - AWS de Manage Access Key oluştur
 - AWS Cli locale kur
-
+- AWS elastic ip atama
+- 
  ```
 terraform init
 terraform plan
