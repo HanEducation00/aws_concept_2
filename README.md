@@ -2,8 +2,12 @@
 
 - AWS de Manage Access Key oluştur
 - AWS Cli locale kur
-- 
 
+ ```
+terraform init
+terraform plan
+terraform apply
+```
 ```
 01_JenkinsServer
 02_MontitoringServer
