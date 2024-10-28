@@ -332,27 +332,148 @@ sudo systemctl enable grafana-server
 sudo systemctl start grafana-server
 
 ```
+***************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+### 3. Prometheus
 
 
+- My-Monitoring-Server IP lerini al
+```
+Public IPv4 address
+MONITORING_SERVER_PUBLIC_IP
 
 
+Private IPv4 addresses
+MONITORING_SERVER_PRIVATE_IP
+```
+
+- My-Monitoring-Server
+```
+cd /etc/prometheus
+
+ls
+
+sudo nano prometheus.yml
+```
+
+- En aşagıdaki kısma ekleme yap
+
+```
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['MONITORING_SERVER_PUBLIC_IP:9100']
+```
+- Makinede düzenlemeleri yap
+
+```
+promtool check config /etc/prometheus/prometheus.yml
+
+curl -X POST http://localhost:9090/-/reload
+```
+
+- Teharardan eklemeler yap
+
+```
+  - job_name: 'jenkins'
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets: ['54.156.17.166:8080']
+```
+***************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+### EK8 Yükleme
+
+```
+sudo apt update
+sudo apt upgrade -y	
+sudo reboot
+```
+
+```
+sudo apt install curl
+curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+```
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo apt install unzip
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+```
+
+```
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+cd /tmp
+sudo mv /tmp/eksctl /bin
+eksctl version
+```
+
+### EK8 admin rölü verme.
+
+- I am kısmında roles kısmına git ve adminasator rölü oluştur.
+- Bu rölü makina ile eşleştir.
+
+```
+eksctl create cluster --name my-workspace-cluster \
+--region eu-north-1 \
+--node-type t3.xlarge \ 
+--nodes 3
+```
+
+```
+kubectl config view
 
 
+kubectl get service
+
+kubectl get svc
+
+kubectl get svc --all-namespaces
 
 
+kubectl get nodes -o wide
+
+kubectl get pods -o wide
+```
+
+***************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+### HELM yükleme
+```
+sudo snap install helm --classic    
+helm version
+```
+                    
+OR
+
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version
+```
+
+```
+helm repo add stable https://charts.helm.sh/stable
+          
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts     
+```
+```
+kubectl create namespace prometheus            
+```
+helm install stable prometheus-community/kube-prometheus-stack -n prometheus      
+```
+```
+kubectl get pods -n prometheus          
+```
 
 
+kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus    
 
 
-
-
-
-
-
-
-
-
-
-
+kubectl get svc -n prometheus
+```
 
 
